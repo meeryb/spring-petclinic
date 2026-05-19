@@ -27,5 +27,10 @@ pipeline {
                 sh './mvnw site'
             }
         }
+        stage('Packaging') {
+            steps {
+                sh './mvnw package -DskipTests'
+            }
+        }
     }
 }
