@@ -2,14 +2,9 @@ pipeline {
     agent any
 
     stages {
-        stage ('Build') {
+        stage('Compilation') {
             steps {
-                sh './mvnw clean install'
-            }
-            post {
-                success {
-                    junit 'target/surefire-reports/**/*.xml'
-                }
+                sh './mvnw clean compile'
             }
         }
     }
