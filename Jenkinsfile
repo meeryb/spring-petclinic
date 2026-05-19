@@ -32,5 +32,17 @@ pipeline {
                 sh './mvnw package -DskipTests'
             }
         }
+        stage('Déploiement') {
+            steps {
+                sh './mvnw deploy -DskipTests'
+            }
+        }
+    }
+    post {
+        failure {
+            mail to: 'meryem.bouzoubaa@esi.ac.ma',
+                 subject: "Échec du Pipeline Jenkins : ${currentBuild.fullDisplayName}",
+                 body: "Une erreur est survenue dans l'une des étapes de build. Veuillez vérifier les logs sur Jenkins."
+        }
     }
 }
